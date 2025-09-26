@@ -5,7 +5,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const formRoutes = require("./routes/formRoutes");
-
+const authRoutes = require("./routes/auth");
 const app = express();
 
 // Middleware
@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/forms", formRoutes);
+app.use("/api/auth", authRoutes);
 
 // Connect MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

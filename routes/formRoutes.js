@@ -10,12 +10,17 @@ const CareerForm = require("../models/CareerForm");
 
 
 const validate = require("../middlewares/validate");
+const auth = require("../middlewares/auth");
+
+
+
 const contactSchema = require("../validators/contactValidator");
 const donationSchema = require("../validators/donationValidator");
 const applicationSchema = require("../validators/applicationValidator");
 const volunteerSchema = require("../validators/volunteerValidator");
 const internshipSchema = require("../validators/internshipValidator");
 const careerSchema = require("../validators/careerValidator");
+const adminSchema = require("../validators/adminValidator");
 
 // Career Form
 router.post("/career", validate(careerSchema), async (req, res) => {
@@ -82,4 +87,44 @@ router.post("/application", validate(applicationSchema), async (req, res) => {
   }
 });
 
+
+//fetches all data from mongodb
+router.get("/all-forms",auth, async (req, res) => {
+  try {
+    // Fetch data in parallel for better performance
+    const [
+      contacts,
+      donations,
+      applications,
+      volunteers,
+      internships,
+      careers,
+    ] = await Promise.all([
+      ContactForm.find(),
+      DonationForm.find(),
+      ApplicationForm.find(),
+      VolunteerForm.find(),
+      InternshipForm.find(),
+      CareerForm.find(),
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        contacts,
+        donations,
+        applications,
+        volunteers,
+        internships,
+        careers,
+      },
+    });
+  } catch (err) {
+    console.error("Error fetching forms:", err.message);
+    res.status(500).json({
+      success: false,
+      error: "Server error while fetching forms",
+    });
+  }
+});
 module.exports = router;
