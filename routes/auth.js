@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../models/Admin");
 const adminSchema = require("../validators/adminValidator");
 const validate = require("../middlewares/validate");
+const loginLimiter = require("../utils/rateLimiter");
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.post("/register", validate(adminSchema),async (req, res) => {
 });
 
 // Admin login
-router.post("/login", validate(adminSchema),async (req, res) => {
+router.post("/login", loginLimiter, validate(adminSchema), async (req, res) => {
   try {
     const { email, password } = req.body;
 

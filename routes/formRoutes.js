@@ -20,7 +20,7 @@ const applicationSchema = require("../validators/applicationValidator");
 const volunteerSchema = require("../validators/volunteerValidator");
 const internshipSchema = require("../validators/internshipValidator");
 const careerSchema = require("../validators/careerValidator");
-const adminSchema = require("../validators/adminValidator");
+// const adminSchema = require("../validators/adminValidator");
 
 // Career Form
 router.post("/career", validate(careerSchema), async (req, res) => {
