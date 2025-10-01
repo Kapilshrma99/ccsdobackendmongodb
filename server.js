@@ -9,7 +9,7 @@ const formRoutes = require("./routes/formRoutes");
 const authRoutes = require("./routes/auth");
 const donationRoutes = require("./routes/donationRoutes");
 const app = express();
-
+app.set("trust proxy", 1);
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
