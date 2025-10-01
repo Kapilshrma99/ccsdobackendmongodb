@@ -7,6 +7,7 @@ const ApplicationForm = require("../models/ApplicationForm");
 const VolunteerForm = require("../models/VolunteerForm");
 const InternshipForm = require("../models/InternshipForm");
 const CareerForm = require("../models/CareerForm");
+const DonationOrder = require("../models/DonationOrders");
 
 
 const validate = require("../middlewares/validate");
@@ -39,7 +40,7 @@ router.post("/internship", validate(internshipSchema), async (req, res) => {
     const newInternship = new InternshipForm(req.body); 
     await newInternship.save();
     res.status(201).json({ success: true, message: "Internship form saved!" });
-  } catch (err) {
+  } catch (err) {    
     res.status(500).json({ success: false, error: err.message });
   } 
 });
@@ -62,7 +63,7 @@ router.post("/contact", validate(contactSchema),async (req, res) => {
     res.status(201).json({ success: true, message: "Contact form saved!" });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
-  }
+  } 
 });
 
 // Donation Form
@@ -99,6 +100,7 @@ router.get("/all-forms",auth, async (req, res) => {
       volunteers,
       internships,
       careers,
+      payments
     ] = await Promise.all([
       ContactForm.find(),
       DonationForm.find(),
@@ -106,6 +108,7 @@ router.get("/all-forms",auth, async (req, res) => {
       VolunteerForm.find(),
       InternshipForm.find(),
       CareerForm.find(),
+      DonationOrder.find()
     ]);
 
     res.status(200).json({
@@ -117,6 +120,7 @@ router.get("/all-forms",auth, async (req, res) => {
         volunteers,
         internships,
         careers,
+        payments
       },
     });
   } catch (err) {

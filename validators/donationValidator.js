@@ -26,7 +26,7 @@ const donationSchema = z.object({
     .optional()
     .transform(val => val ? sanitizeInput(val.toUpperCase()) : val),
 
-  country: z.string().min(2, "Country required").transform(sanitizeInput),
+  // country: z.string().min(2, "Country required").transform(sanitizeInput),
   state: z.string().min(2, "State required").transform(sanitizeInput),
   city: z.string().min(2, "City required").transform(sanitizeInput),
   address: z.string().min(5, "Address required").transform(sanitizeInput),
