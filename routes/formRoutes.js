@@ -41,13 +41,15 @@ const transporter = nodemailer.createTransport({
 
 async function mail(subject, text) {
 try {
-    await transporter.sendMail({
+  console.log("mail sending")
+   const res= await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.OWNER_EMAIL, // where emails go
       subject: subject,
       text: text,
 
     });
+    console.log("mail sent",res)
 
   } catch (error) {
     console.error(error);
