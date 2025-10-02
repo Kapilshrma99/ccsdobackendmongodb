@@ -15,7 +15,7 @@ const razorpay = new Razorpay({
 const transporter = nodemailer.createTransport({
   service: "SendGrid",
   auth: {
-    user: "THpuykwQRKS4KIA6bJVzgw",   // literally the word "apikey"
+    user: "apikey",   // literally the word "apikey"
     pass: process.env.SENDGRID_API_KEY,
   },
 });
