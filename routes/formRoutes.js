@@ -28,23 +28,16 @@ const { emailTextforcareer } = require("../emailtext");
 // const adminSchema = require("../validators/adminValidator");
 
 const transporter = nodemailer.createTransport({
-  service: "SendGrid",
+  host: "smtp.hostinger.com",
+  // port:587,
+  port: 465,
+  // secure:false,        // SSL port
+  secure: true, 
   auth: {
-    user: "apikey",   // literally the word "apikey"
-    pass: process.env.SENDGRID_API_KEY,
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
   },
 });
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.hostinger.com",
-//   // port:587,
-//   port: 465,
-//   // secure:false,        // SSL port
-//   secure: true, 
-//   auth: {
-//     user: process.env.EMAIL_USER, 
-//     pass: process.env.EMAIL_PASS, 
-//   },
-// });
 
 async function mail(subject, text) {
 try {
