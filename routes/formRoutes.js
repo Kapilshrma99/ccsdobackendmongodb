@@ -29,10 +29,10 @@ const { emailTextforcareer } = require("../emailtext");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.hostinger.com",
-  port:587,
-  // port: 465,
-  secure:false,        // SSL port
-  // secure: true, 
+  // port:587,
+  port: 465,
+  // secure:false,        // SSL port
+  secure: true, 
   auth: {
     user: process.env.EMAIL_USER, 
     pass: process.env.EMAIL_PASS, 
