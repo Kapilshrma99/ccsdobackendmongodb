@@ -12,17 +12,23 @@ const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET
 });
-
-
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  port: 465,        // SSL port
-  secure: true, 
+  service: "SendGrid",
   auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS, 
+    user: "THpuykwQRKS4KIA6bJVzgw",   // literally the word "apikey"
+    pass: process.env.SENDGRID_API_KEY,
   },
 });
+
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.hostinger.com",
+//   port: 465,        // SSL port
+//   secure: true, 
+//   auth: {
+//     user: process.env.EMAIL_USER, 
+//     pass: process.env.EMAIL_PASS, 
+//   },
+// });
 
 let emailText = "";
 router.post('/create-order', async (req, res) => {

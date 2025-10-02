@@ -28,22 +28,30 @@ const { emailTextforcareer } = require("../emailtext");
 // const adminSchema = require("../validators/adminValidator");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.hostinger.com",
-  // port:587,
-  port: 465,
-  // secure:false,        // SSL port
-  secure: true, 
+  service: "SendGrid",
   auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS, 
+    user: "THpuykwQRKS4KIA6bJVzgw",   // literally the word "apikey"
+    pass: process.env.SENDGRID_API_KEY,
   },
 });
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.hostinger.com",
+//   // port:587,
+//   port: 465,
+//   // secure:false,        // SSL port
+//   secure: true, 
+//   auth: {
+//     user: process.env.EMAIL_USER, 
+//     pass: process.env.EMAIL_PASS, 
+//   },
+// });
 
 async function mail(subject, text) {
 try {
   console.log("mail sending")
    const res= await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      // from: process.env.EMAIL_USER,
+      from:"kapilsharma09311@gmail.com",
       to: process.env.OWNER_EMAIL, // where emails go
       subject: subject,
       text: text,
